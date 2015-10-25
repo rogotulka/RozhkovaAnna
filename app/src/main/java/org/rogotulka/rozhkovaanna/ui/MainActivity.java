@@ -34,6 +34,34 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.news_refresh) {
+            getLoaderManager().restartLoader(LOADER_NEWS, null, MainActivity.this).forceLoad();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        menu.findItem(R.id.news_refresh).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                getLoaderManager().restartLoader(LOADER_NEWS, null, MainActivity.this).forceLoad();
+//                return true;
+//            }
+//        });
+//        return super.onCreateOptionsMenu(menu);
+//    }
+
+    @Override
     public Loader onCreateLoader(int id, Bundle args) {
         if (id == LOADER_NEWS) {
             return new AsyncTaskLoader<List<News>>(getApplicationContext()) {

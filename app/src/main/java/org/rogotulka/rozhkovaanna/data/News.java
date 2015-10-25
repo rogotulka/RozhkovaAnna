@@ -13,13 +13,14 @@ public class News implements Comparable<News> {
     private String description;
     private Date date;
     private String image;
+    private Source source;
 
 
     @Override
     public int compareTo(News another) {
-        if (getDate() == null || another.getDate() == null)
+        if (getDate() == null || another == null || another.getDate() == null)
             return 0;
-        return getDate().compareTo(another.getDate());
+        return another.getDate().compareTo(getDate());
     }
 
     public String getTitle() {
@@ -52,6 +53,14 @@ public class News implements Comparable<News> {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Source getSource() {
+        return source;
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
     }
 
     @Override

@@ -1,22 +1,23 @@
 package org.rogotulka.rozhkovaanna.server.api.request;
 
 import org.rogotulka.rozhkovaanna.data.News;
+import org.rogotulka.rozhkovaanna.data.Source;
 
 import java.util.List;
 
 public class RssRequest implements Request<List<News>> {
 
-    private String source;
+    private Source source;
 
-    public RssRequest(String source) {
+    public RssRequest(Source source) {
         this.source = source;
     }
 
-    public String getSource() {
+    public Source getSource() {
         return source;
     }
 
-    public void setSource(String source) {
+    public void setSource(Source source) {
         this.source = source;
     }
 

@@ -21,4 +21,16 @@ public class LogicImplTest extends AndroidTestCase {
         assertNotNull(news);
         assertNotSame(0, news.size());
     }
+
+    public void testOrderedCompoundNews() {
+        Logic logic = LogicProvider.getLogic();
+        List<Source> sourceList = new ArrayList<>();
+        sourceList.add(Source.GAZETA);
+        sourceList.add(Source.LENTA);
+        List<News> news = logic.getCompoundNews(sourceList);
+        for (int i = 0; i < news.size() - 1; i++) {
+            int compareResult = news.get(i).compareTo(news.get(i + 1));
+            assertEquals(true, compareResult >= 0);
+        }
+    }
 }

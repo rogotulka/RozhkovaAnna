@@ -3,6 +3,7 @@ package org.rogotulka.rozhkovaanna.server.api;
 import android.util.Xml;
 
 import org.rogotulka.rozhkovaanna.data.News;
+import org.rogotulka.rozhkovaanna.data.Source;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -25,15 +26,15 @@ class XMLParser {
     private static final String XML_IMAGE = "enclosure";
     private static final String XML_ATTR_URL_IMAGE = "url";
 
-    public List<News> parseNews(InputStream in) {
+    public List<News> parseNews(Source source, InputStream in) {
         XmlPullParser parser = startParse(in);
         if (parser != null) {
-            return extractNewsList(parser);
+            return extractNewsList(source, parser);
         }
         return null;
     }
 
-    private List<News> extractNewsList(XmlPullParser parser) {
+    private List<News> extractNewsList(Source source, XmlPullParser parser) {
         List<News> result = new ArrayList<>();
         try {
             parser.nextTag();
@@ -45,6 +46,7 @@ class XMLParser {
                 String name = parser.getName();
                 if (name.equals(XML_ITEM)) {
                     News news = extractNews(parser);
+                    news.setSource(source);
                     result.add(news);
                 } else {
                     skip(parser);

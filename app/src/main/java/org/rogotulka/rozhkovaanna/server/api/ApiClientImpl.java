@@ -38,9 +38,9 @@ class ApiClientImpl implements ApiClient {
         List<News> result = new ArrayList<>();
         Network network = new Network();
         try {
-            InputStream response = network.getInputStream(request.getSource());
+            InputStream response = network.getInputStream(request.getSource().getSourceString());
             XMLParser parser = new XMLParser();
-            result = parser.parseNews(response);
+            result = parser.parseNews(request.getSource(), response);
         } catch (IOException e) {
             // TODO
         } finally {

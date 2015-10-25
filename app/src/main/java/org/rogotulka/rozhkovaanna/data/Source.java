@@ -12,7 +12,7 @@ public enum Source {
         this.source = source;
     }
 
-    public String getSource() {
+    public String getSourceString() {
         return source;
     }
 }

@@ -6,6 +6,7 @@ import org.rogotulka.rozhkovaanna.server.api.ApiClient;
 import org.rogotulka.rozhkovaanna.server.api.request.RssRequest;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
@@ -36,7 +37,7 @@ class LogicImpl implements Logic {
         for (Source source : sources) {
             RssRequestRunnable rssRequestRunnable = new RssRequestRunnable(
                     mApiClient,
-                    new RssRequest(source.getSource()),
+                    new RssRequest(source),
                     countDownLatch);
             tasks.add(rssRequestRunnable);
             mExecutor.execute(rssRequestRunnable);
@@ -51,6 +52,8 @@ class LogicImpl implements Logic {
         for (RssRequestRunnable rssRequestRunnable : tasks) {
             newsList.addAll(rssRequestRunnable.getNewsList());
         }
+
+        Collections.sort(newsList);
 
         return newsList;
     }

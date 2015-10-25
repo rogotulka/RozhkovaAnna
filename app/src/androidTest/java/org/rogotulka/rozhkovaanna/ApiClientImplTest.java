@@ -17,13 +17,7 @@ public class ApiClientImplTest extends AndroidTestCase {
 
     public void testApiClientRequestRss() throws IOException, InterruptedException {
         ApiClient apiClient = ApiClientProvider.getApiClient();
-        List<News> news = apiClient.execute(new RssRequest(Source.GAZETA.getSource()));
-        assertNotNull(news);
-    }
-
-    public void testEmptyRequestRssApiClient() throws IOException, InterruptedException {
-        ApiClient apiClient = ApiClientProvider.getApiClient();
-        List<News> news = apiClient.execute(new RssRequest(""));
+        List<News> news = apiClient.execute(new RssRequest(Source.GAZETA));
         assertNotNull(news);
     }
 
@@ -35,7 +29,7 @@ public class ApiClientImplTest extends AndroidTestCase {
 
     public void testNewsRequestRssApiClient() throws IOException, InterruptedException {
         ApiClient apiClient = ApiClientProvider.getApiClient();
-        List<News> news = apiClient.execute(new RssRequest(Source.LENTA.getSource()));
+        List<News> news = apiClient.execute(new RssRequest(Source.LENTA));
         assertNotSame(news.size(), 0);
         for (News newsItem : news) {
             assertNotNull(newsItem.getTitle());

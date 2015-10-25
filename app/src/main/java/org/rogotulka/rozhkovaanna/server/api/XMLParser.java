@@ -132,7 +132,7 @@ class XMLParser {
     private String readAttr(XmlPullParser parser, String attr) throws IOException, XmlPullParserException {
         String result = "";
         result = parser.getAttributeValue(null, attr);
-
+        parser.nextTag();
         return result;
     }
 

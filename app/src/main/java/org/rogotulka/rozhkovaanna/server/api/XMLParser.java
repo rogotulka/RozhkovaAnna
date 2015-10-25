@@ -53,9 +53,9 @@ class XMLParser {
                 }
             }
         } catch (XmlPullParserException e) {
-            // TODO
+            //NOP
         } catch (IOException e) {
-            // TODO
+            //NOP
         }
         return result;
     }
@@ -95,9 +95,9 @@ class XMLParser {
                 }
             }
         } catch (XmlPullParserException e) {
-            // TODO
+            //NOP
         } catch (IOException e) {
-            // TODO
+            //NOP
         }
         return news;
     }
@@ -113,9 +113,9 @@ class XMLParser {
             parser.require(XmlPullParser.START_TAG, ns, XML_RSS);
             return parser;
         } catch (XmlPullParserException e) {
-            // TODO
+            //NOP
         } catch (IOException e) {
-            // TODO
+            //NOP
         }
         return null;
     }

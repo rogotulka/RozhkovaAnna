@@ -26,7 +26,7 @@ class RssRequestRunnable implements Runnable {
         try {
             mNewsList = mApiClient.execute(mRssRequest);
         } catch (IOException e) {
-            //todo
+            //NOP
         }
 
         mCountDownLatch.countDown();

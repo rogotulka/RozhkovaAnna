@@ -42,7 +42,7 @@ class ApiClientImpl implements ApiClient {
             XMLParser parser = new XMLParser();
             result = parser.parseNews(request.getSource(), response);
         } catch (IOException e) {
-            // TODO
+            //NOP
         } finally {
             network.close();
         }

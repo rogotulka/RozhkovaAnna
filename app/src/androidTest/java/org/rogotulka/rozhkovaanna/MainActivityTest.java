@@ -3,6 +3,8 @@ package org.rogotulka.rozhkovaanna;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.ListView;
 
+import org.rogotulka.rozhkovaanna.ui.MainActivity;
+
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     public MainActivityTest() {

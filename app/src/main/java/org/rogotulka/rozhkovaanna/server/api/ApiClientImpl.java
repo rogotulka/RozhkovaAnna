@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ApiClientImpl implements ApiClient {
+class ApiClientImpl implements ApiClient {
 
     private Map<Class<? extends Request<?>>, RequestExecutor> mMap = new HashMap<>();
 

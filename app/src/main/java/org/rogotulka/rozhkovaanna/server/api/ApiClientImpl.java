@@ -15,10 +15,7 @@ public class ApiClientImpl implements ApiClient {
 
     private Map<Class<? extends Request<?>>, RequestExecutor> mMap = new HashMap<>();
 
-    private Network mNetwork;
-
     public ApiClientImpl() {
-        mNetwork = new Network();
 
         mMap.put(RssRequest.class, new RequestExecutor<RssRequest, List<News>>() {
             @Override
@@ -39,16 +36,17 @@ public class ApiClientImpl implements ApiClient {
 
     private List<News> getNewsList(RssRequest request) {
         List<News> result = new ArrayList<>();
+        Network network = new Network();
         try {
-            InputStream response = mNetwork.getInputStream(request.getSource());
+            InputStream response = network.getInputStream(request.getSource());
             XMLParser parser = new XMLParser();
             result = parser.parseNews(response);
         } catch (IOException e) {
             // TODO
-            if (e != null) {
-
-            }
+        } finally {
+            network.close();
         }
+
         return result;
     }
 }

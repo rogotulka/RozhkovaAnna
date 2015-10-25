@@ -4,6 +4,7 @@ package org.rogotulka.rozhkovaanna;
 import android.test.AndroidTestCase;
 
 import org.rogotulka.rozhkovaanna.data.News;
+import org.rogotulka.rozhkovaanna.data.Source;
 import org.rogotulka.rozhkovaanna.server.api.ApiClient;
 import org.rogotulka.rozhkovaanna.server.api.ApiClientProvider;
 import org.rogotulka.rozhkovaanna.server.api.request.RssRequest;
@@ -16,7 +17,7 @@ public class ApiClientImplTest extends AndroidTestCase {
 
     public void testApiClientRequestRss() throws IOException, InterruptedException {
         ApiClient apiClient = ApiClientProvider.getApiClient();
-        List<News> news = apiClient.execute(new RssRequest("http://www.gazeta.ru/export/rss/lenta.xml"));
+        List<News> news = apiClient.execute(new RssRequest(Source.GAZETA.getSource()));
         assertNotNull(news);
     }
 
@@ -34,7 +35,7 @@ public class ApiClientImplTest extends AndroidTestCase {
 
     public void testNewsRequestRssApiClient() throws IOException, InterruptedException {
         ApiClient apiClient = ApiClientProvider.getApiClient();
-        List<News> news = apiClient.execute(new RssRequest("http://lenta.ru/rss"));
+        List<News> news = apiClient.execute(new RssRequest(Source.LENTA.getSource()));
         assertNotSame(news.size(), 0);
         for (News newsItem : news) {
             assertNotNull(newsItem.getTitle());

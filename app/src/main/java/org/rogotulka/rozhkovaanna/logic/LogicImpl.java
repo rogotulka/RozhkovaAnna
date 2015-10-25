@@ -32,11 +32,13 @@ class LogicImpl implements Logic {
         }
 
         CountDownLatch countDownLatch = new CountDownLatch(sources.size());
+        List<RssRequestRunnable> tasks = new ArrayList<>();
         for (Source source : sources) {
             RssRequestRunnable rssRequestRunnable = new RssRequestRunnable(
                     mApiClient,
                     new RssRequest(source.getSource()),
                     countDownLatch);
+            tasks.add(rssRequestRunnable);
             mExecutor.execute(rssRequestRunnable);
         }
 
@@ -44,6 +46,10 @@ class LogicImpl implements Logic {
             countDownLatch.await(10, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             //NOP
+        }
+
+        for (RssRequestRunnable rssRequestRunnable : tasks) {
+            newsList.addAll(rssRequestRunnable.getNewsList());
         }
 
         return newsList;

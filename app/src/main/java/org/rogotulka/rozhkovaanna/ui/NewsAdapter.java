@@ -22,6 +22,7 @@ import java.util.List;
 public class NewsAdapter extends BaseAdapter {
 
     private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
     private List<News> mNewsList;
     private Context mContext;
 
@@ -31,6 +32,7 @@ public class NewsAdapter extends BaseAdapter {
         private TextView vDescription;
         private TextView vDate;
         private TextView vSource;
+        private DownloadImageTask mDownloadImageTask;
     }
 
     private static class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
@@ -108,6 +110,9 @@ public class NewsAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
             viewHolder.vNewsImage.setImageDrawable(null);
             viewHolder.vDescription.setVisibility(View.GONE);
+            if (viewHolder.mDownloadImageTask != null) {
+                viewHolder.mDownloadImageTask.cancel(true);
+            }
         }
 
         News news = mNewsList.get(position);
@@ -117,7 +122,8 @@ public class NewsAdapter extends BaseAdapter {
         viewHolder.vSource.setText(news.getSource().name().toLowerCase());
         if (news.getImage() != null) {
             viewHolder.vNewsImage.setVisibility(View.VISIBLE);
-            new DownloadImageTask(viewHolder.vNewsImage).execute(news.getImage());
+            viewHolder.mDownloadImageTask = new DownloadImageTask(viewHolder.vNewsImage);
+            viewHolder.mDownloadImageTask.execute(news.getImage());
         } else {
             viewHolder.vNewsImage.setVisibility(View.GONE);
         }

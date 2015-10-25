@@ -31,4 +31,17 @@ public class ApiClientImplTest extends AndroidTestCase {
         assertNotNull(news);
     }
 
+    public void testNewsRequestRssApiClient() throws IOException, InterruptedException {
+        ApiClientImpl apiClient = new ApiClientImpl();
+        List<News> news = apiClient.execute(new RssRequest("http://lenta.ru/rss"));
+        assertNotSame(news.size(), 0);
+        for (News newsItem : news) {
+            assertNotNull(newsItem.getTitle());
+            assertNotNull(newsItem.getDescription());
+            assertNotNull(newsItem.getDate());
+            assertNotNull(newsItem.getImage());
+        }
+        assertNotNull(news);
+    }
+
 }

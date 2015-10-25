@@ -1,19 +1,19 @@
 package org.rogotulka.rozhkovaanna.data;
 
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class News implements Comparable<News> {
 
-    private static SimpleDateFormat FORMATTER =
-            new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z");
+    public static SimpleDateFormat FORMATTER =
+            new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss Z", Locale.US);
 
     private String title;
     private String description;
     private Date date;
-    private URL image;
-    private String category;
+    private String image;
+
 
     @Override
     public int compareTo(News another) {
@@ -46,19 +46,35 @@ public class News implements Comparable<News> {
         this.date = date;
     }
 
-    public URL getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(URL image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
-    public String getCategory() {
-        return category;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        News news = (News) o;
+
+        if (title != null ? !title.equals(news.title) : news.title != null) return false;
+        if (description != null ? !description.equals(news.description) : news.description != null)
+            return false;
+        if (date != null ? !date.equals(news.date) : news.date != null) return false;
+        return !(image != null ? !image.equals(news.image) : news.image != null);
+
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    @Override
+    public int hashCode() {
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (image != null ? image.hashCode() : 0);
+        return result;
     }
 }

@@ -19,7 +19,7 @@ class ApiClientImpl implements ApiClient {
 
         mMap.put(RssRequest.class, new RequestExecutor<RssRequest, List<News>>() {
             @Override
-            public List<News> execute(RssRequest rssRequest) throws IOException, InterruptedException {
+            public List<News> execute(RssRequest rssRequest) throws IOException {
                 return getNewsList(rssRequest);
             }
         });
@@ -27,7 +27,7 @@ class ApiClientImpl implements ApiClient {
 
     @SuppressWarnings({"SuspiciousMethodCalls", "unchecked"})
     @Override
-    public <ResponseType> ResponseType execute(Request<ResponseType> request) throws IOException, InterruptedException {
+    public <ResponseType> ResponseType execute(Request<ResponseType> request) throws IOException {
         if (!mMap.containsKey(request.getClass())) {
             throw new UnsupportedOperationException("Request is not supported or implemented: " + request.getClass().getCanonicalName());
         }

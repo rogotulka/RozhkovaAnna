@@ -6,6 +6,5 @@ import java.io.IOException;
 
 public interface ApiClient {
 
-    <ResponseType> ResponseType execute(Request<ResponseType> request)
-            throws IOException, InterruptedException;
+    <ResponseType> ResponseType execute(Request<ResponseType> request) throws IOException;
 }

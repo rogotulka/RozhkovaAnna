@@ -119,7 +119,7 @@ public class NewsAdapter extends BaseAdapter {
         viewHolder.vTitle.setText(news.getTitle());
         viewHolder.vDescription.setText(news.getDescription());
         viewHolder.vDate.setText(FORMATTER.format(news.getDate()));
-        viewHolder.vSource.setText(news.getSource().name().toLowerCase());
+        viewHolder.vSource.setText(news.getSource().getName());
         if (news.getImage() != null) {
             viewHolder.vNewsImage.setVisibility(View.VISIBLE);
             viewHolder.mDownloadImageTask = new DownloadImageTask(viewHolder.vNewsImage);

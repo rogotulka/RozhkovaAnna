@@ -8,6 +8,10 @@ public class RssRequest implements Request<List<News>> {
 
     private String source;
 
+    public RssRequest(String source) {
+        this.source = source;
+    }
+
     public String getSource() {
         return source;
     }

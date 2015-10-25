@@ -13,23 +13,22 @@ import java.util.List;
 
 public class ApiClientImplTest extends AndroidTestCase {
 
-    public void testApiClientRequestRss() {
-
-        List<News> news = null;
-
+    public void testApiClientRequestRss() throws IOException, InterruptedException {
         ApiClientImpl apiClient = new ApiClientImpl();
-
-        try {
-            news = apiClient.execute(new RssRequest("http://www.gazeta.ru/export/rss/lenta.xml"));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-
-        }
-
+        List<News> news = apiClient.execute(new RssRequest("http://www.gazeta.ru/export/rss/lenta.xml"));
         assertNotNull(news);
+    }
 
+    public void testEmptyRequestRssApiClient() throws IOException, InterruptedException {
+        ApiClientImpl apiClient = new ApiClientImpl();
+        List<News> news = apiClient.execute(new RssRequest(""));
+        assertNotNull(news);
+    }
+
+    public void testNullRequestRssApiClient() throws IOException, InterruptedException {
+        ApiClientImpl apiClient = new ApiClientImpl();
+        List<News> news = apiClient.execute(new RssRequest(null));
+        assertNotNull(news);
     }
 
 }

@@ -1,6 +1,7 @@
 package org.rogotulka.rozhkovaanna;
 
 import android.test.AndroidTestCase;
+import android.util.Log;
 
 import org.rogotulka.rozhkovaanna.data.News;
 import org.rogotulka.rozhkovaanna.data.Source;
@@ -30,7 +31,8 @@ public class LogicImplTest extends AndroidTestCase {
         List<News> news = logic.getCompoundNews(sourceList);
         for (int i = 0; i < news.size() - 1; i++) {
             int compareResult = news.get(i).compareTo(news.get(i + 1));
-            assertEquals(true, compareResult >= 0);
+            Log.d("TEST_TAG", news.get(i).getDate().toString() + news.get(i + 1).getDate().toString());
+            assertEquals(true, compareResult <= 0);
         }
     }
 }

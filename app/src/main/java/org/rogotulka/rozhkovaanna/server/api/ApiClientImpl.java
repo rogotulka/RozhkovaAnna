@@ -36,6 +36,9 @@ class ApiClientImpl implements ApiClient {
 
     private List<News> getNewsList(RssRequest request) {
         List<News> result = new ArrayList<>();
+        if (request == null || request.getSource() == null) {
+            return result;
+        }
         Network network = new Network();
         try {
             InputStream response = network.getInputStream(request.getSource().getSourceString());

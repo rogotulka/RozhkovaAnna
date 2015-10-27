@@ -24,6 +24,7 @@ class Network {
     public void close() {
         if (connection != null) {
             connection.disconnect();
+            // TODO: по логике хорошо было бы тут написать connection = null;
         }
     }
 }

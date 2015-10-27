@@ -95,6 +95,7 @@ public class NewsAdapter extends BaseAdapter {
             viewHolder.vDate = (TextView) convertView.findViewById(R.id.news_date);
             viewHolder.vSource = (TextView) convertView.findViewById(R.id.news_source);
             View root = convertView.findViewById(R.id.root);
+            // TODO: List старается переиспользовать элементы. Подозреваю, что при таком подходе у вас будут новости пропадать из списка и расти потребление памяти. Попробуйте загрузить 40 новостей и удалить с 5-ой по 15-ую. После этого промотать лист в самый конец. Если все новости по порядку будут показаны, то все ок. Если будут "дырки", то ваш подход не работает.
             root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

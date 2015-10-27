@@ -1,13 +1,8 @@
 package org.rogotulka.rozhkovaanna.data;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 public class News implements Comparable<News> {
-
-    public static SimpleDateFormat FORMATTER =
-            new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss Z", Locale.US);
 
     private String title;
     private String description;

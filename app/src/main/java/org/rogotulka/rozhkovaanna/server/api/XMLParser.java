@@ -10,13 +10,17 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 class XMLParser {
 
     private static final String XML_RSS = "rss";
     private static final String ns = null;
+
+    private static final String FORMAT = "E, dd MMM yyyy HH:mm:ss Z";
 
     private static final String XML_CHANNEL = "channel";
     private static final String XML_ITEM = "item";
@@ -80,7 +84,8 @@ class XMLParser {
 
                     case XML_DATE:
                         try {
-                            news.setDate(News.FORMATTER.parse(readTag(parser, XML_DATE)));
+                            news.setDate(new SimpleDateFormat(FORMAT, Locale.US).parse(
+                                    readTag(parser, XML_DATE)));
                         } catch (ParseException e) {
                             //NOP
                         }

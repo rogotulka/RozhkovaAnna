@@ -18,6 +18,8 @@ public class News implements Comparable<News> {
 
     @Override
     public int compareTo(News another) {
+        // TODO: Нарушение контракта. Выдержка из документации: Note that null is not an instance of any class, and e.compareTo(null) should throw a NullPointerException even though e.equals(null) returns false.
+        // Проверку getDate() == null я бы тоже убрал. Судя по коду date не может быть null. Значит лучше зафиксировать этот контракт в конструкторе объекта. 
         if (getDate() == null || another == null || another.getDate() == null)
             return 0;
         return another.getDate().compareTo(getDate());

@@ -50,6 +50,7 @@ class LogicImpl implements Logic {
         }
 
         for (RssRequestRunnable rssRequestRunnable : tasks) {
+            //TODO: потенциальный NullPointerException. Поток может за 10 секунд не запуститься или выполняться дольше 10 секунд. Тогда метод getNewsList вернет null
             newsList.addAll(rssRequestRunnable.getNewsList());
         }
 

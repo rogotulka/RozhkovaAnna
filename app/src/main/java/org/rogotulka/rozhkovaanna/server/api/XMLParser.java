@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -58,13 +59,15 @@ class XMLParser {
             }
         } catch (XmlPullParserException e) {
             //NOP
+        } catch (IllegalArgumentException e) {
+            //NOP
         } catch (IOException e) {
             //NOP
         }
         return result;
     }
 
-    private News extractNews(XmlPullParser parser) {
+    private News extractNews(XmlPullParser parser) throws IllegalArgumentException {
         News news = new News();
         try {
             parser.require(XmlPullParser.START_TAG, ns, XML_ITEM);
@@ -84,8 +87,12 @@ class XMLParser {
 
                     case XML_DATE:
                         try {
-                            news.setDate(new SimpleDateFormat(FORMAT, Locale.US).parse(
-                                    readTag(parser, XML_DATE)));
+                            Date date = new SimpleDateFormat(FORMAT, Locale.US).parse(
+                                    readTag(parser, XML_DATE));
+                            if (date == null) {
+                                throw new IllegalArgumentException("Illegal news without date");
+                            }
+                            news.setDate(date);
                         } catch (ParseException e) {
                             //NOP
                         }
